@@ -1,22 +1,20 @@
 #include<iostream>
-#include<string>
+#include<cstring>
 
 using namespace std;
 
 int main()
 {
-    string firstName, lastName;
     
-    cout<<"enter your first name:";
-    cin>>firstName;
-    cout<<"enter your last name:";
-   cin>>lastName;
-     
-     
-     string fullName= firstName + " "+ lastName;
-     
+    char firstName[100]={'A','d','n','a','n',' '};
+    char lastName[100]={'A','b','d','u','l','l','a','h'};
+  string  fullName = strcat(firstName, lastName);
+  
+  
         cout<<"Your full name is :"<< fullName<<endl;
+     
      
      
      return 0;
 }
+
