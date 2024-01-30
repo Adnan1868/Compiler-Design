@@ -1,0 +1,32 @@
+#include<iostream> 
+using namespace std;
+
+int main(){
+    
+    
+    
+    int num;
+    cout<<"Enter one number to calculate it's factorial:"<<endl;
+    cin>>num;
+    
+    if(num<=0){
+        cout<<"You have typed a wrong number"<<endl;
+        return 1;
+    }
+   
+    int fact=1;
+    for (int j=1; j<=num; j++){
+        fact*=j;
+    }
+    
+    
+    
+    
+    cout<<"The factorail of your given number is:" <<fact<<endl;
+    
+    
+    
+    
+    
+    return 0;
+}
