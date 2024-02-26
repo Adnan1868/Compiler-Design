@@ -6,7 +6,7 @@ using namespace std;
 
 bool isReservedKeyword(const string &input) {
     
-    const string keywords[] = {"int", "float", "double", "char", "bool", "void"};
+    const string keywords[] = {"int", "float", "double", "char", "bool", "void","main"};
     
     for (const string &keyword : keywords) {
         if (input == keyword) {
