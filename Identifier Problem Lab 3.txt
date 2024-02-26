@@ -3,32 +3,50 @@
 
 using namespace std;
 
-bool isValidIdentifier(const string & input) {
+
+bool isReservedKeyword(const string &input) {
     
+    const string keywords[] = {"int", "float", "double", "char", "bool", "void"};
+    
+    for (const string &keyword : keywords) {
+        if (input == keyword) {
+            return true;
+        }
+    }
+    
+    return false; 
+}
+
+
+bool isValidIdentifier(const string &input) {
     if (input.empty()) {
         cout << "Invalid identifier: Input is empty." << endl;
         return false;
     }
+
+    if (isReservedKeyword(input)) {
+        cout << "Invalid identifier: Input matches a reserved keyword." << endl;
+        return false;
+    }
+
 
     if (!((input[0] >= 'a' && input[0] <= 'z') || (input[0] >= 'A' && input[0] <= 'Z') || input[0] == '_')) {
         cout << "Invalid identifier: First character must be an alphabet character or underscore." << endl;
         return false;
     }
 
-    for (size_t i = 1; i < input.length(); ++i) {
 
+    for (size_t i = 1; i < input.length(); ++i) {
         if (!((input[i] >= 'a' && input[i] <= 'z') || (input[i] >= 'A' && input[i] <= 'Z') || (input[i] >= '0' && input[i] <= '9') || input[i] == '_')) {
             cout << "Invalid identifier: Character at position " << i << " is not alphanumeric or underscore." << endl;
             return false;
         }
     }
 
-  
     return true;
 }
 
 int main() {
- 
     string input;
     cout << "Enter a string to check if it's a valid identifier: ";
     cin >> input;
@@ -41,3 +59,4 @@ int main() {
 
     return 0;
 }
+
