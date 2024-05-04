@@ -1,0 +1,98 @@
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+using namespace std;
+
+vector<string> keywords = {"if", "do", "while", "for", "int", "class", "float", "include", "std", "cout", "main"};
+vector<char> operators = {'=', '>', '<', '+', '-', '*', '/', '%'};
+vector<char> punctuation = {'(', ')', '{', '}', ':', ';', '"', ',', '\'', '#'};
+vector<string> libraries = {"iostream"};
+
+bool isKeyword(string word) {
+    for (string keyword : keywords) {
+        if (word == keyword) {
+            return true;
+  }
+ }
+    return false;
+}
+
+bool isOperator(char ch) {
+    for (char op : operators) {
+        if (ch == op) {
+            return true;
+ }  }
+    return false; }
+
+bool isPunctuation(char ch) {
+    for (char punc : punctuation) {
+        if (ch == punc) {
+            return true; }
+    }
+    return false; }
+
+bool isLibrary(string word) {
+    for (string lib : libraries) {
+        if (word == lib) {
+            return true;}
+    }
+    return false; }
+
+bool isConstant(string word) {
+    if (isdigit(word[0]) || word == "True" || word == "False" || (word[0] == '"' && word[word.size()-1] == '"')) {
+        return true;
+    }
+    return false; }
+
+bool isStringLiteral(string word) {
+    if (word[0] == '"' && word[word.size()-1] == '"') {
+        return true; }
+    return false; }
+
+int main() {
+    ifstream file(R"(C:\Users\User\OneDrive - American International University-Bangladesh\Desktop\lex_input.txt (1).txt)");
+    string line;
+    while (getline(file, line)) {
+        cout << "Analyzing line: " << line << "\n";
+        string word;
+        for (char ch : line) {
+            if (ch == ' ' || ch == '\t' || ch == '\n') {
+                if (!word.empty()) {
+                    if (isKeyword(word)) {
+                        cout << word << " is a keyword.\n";
+                    } else if (isConstant(word)) {
+                        cout << word << " is a constant.\n";
+                    } else if (isLibrary(word)) {
+                        cout << word << " is a library.\n";
+                    } else if (isStringLiteral(word)) {
+                        cout << word << " is a string literal.\n";
+                    } else {
+                        cout << word << " is an identifier.\n";
+                    }
+                    word.clear();
+                }
+            } else if (isOperator(ch)) {
+                cout << ch << " is an operator.\n";
+            } else if (isPunctuation(ch)) {
+                cout << ch << " is a punctuation.\n";
+            } else {
+                word.push_back(ch);
+            }
+        }
+        if (!word.empty()) {
+            if (isKeyword(word)) {
+                cout << word << " is a keyword.\n";
+            } else if (isConstant(word)) {
+                cout << word << " is a constant.\n";
+            } else if (isLibrary(word)) {
+                cout << word << " is a library.\n";
+            } else if (isStringLiteral(word)) {
+                cout << word << " is a string literal.\n";
+            } else {
+                cout << word << " is an identifier.\n";
+            }
+    }
+    }
+    return 0;
+}
